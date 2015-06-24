@@ -134,7 +134,8 @@ public class AffichageFractale extends javax.swing.JFrame {
 
         typeFractalLbl.setText("Type de représentation fractale");
 
-        typeFractalCmbBx.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Noir et Blanc", "Nuance de Gris" }));
+        typeFractalCmbBx.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Noir et Blanc", "Nuance de Gris", "Couleur" }));
+        typeFractalCmbBx.setToolTipText("");
         typeFractalCmbBx.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 typeFractalCmbBxItemStateChanged(evt);
