@@ -53,13 +53,17 @@
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="basesLbl" alignment="1" min="-2" max="-2" attributes="0"/>
                                       <Component id="debutSequenceLbl" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="typeFractalLbl" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="nbSequenceTxtFld" pref="76" max="32767" attributes="0"/>
-                                  <Component id="nbBasesLbl" max="32767" attributes="0"/>
-                                  <Component id="debutSequenceTxtFld" max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                      <Component id="nbSequenceTxtFld" pref="76" max="32767" attributes="0"/>
+                                      <Component id="nbBasesLbl" max="32767" attributes="0"/>
+                                      <Component id="debutSequenceTxtFld" max="32767" attributes="0"/>
+                                  </Group>
+                                  <Component id="typeFractalCmbBx" min="-2" pref="85" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
@@ -104,6 +108,11 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="debutSequenceLbl" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="debutSequenceTxtFld" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="typeFractalLbl" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="typeFractalCmbBx" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -216,6 +225,25 @@
       <Events>
         <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="debutSequenceTxtFldFocusLost"/>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="debutSequenceTxtFldActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="typeFractalLbl">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Type de repr&#xe9;sentation fractale"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="typeFractalCmbBx">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="2">
+            <StringItem index="0" value="Noir et Blanc"/>
+            <StringItem index="1" value="Nuance de Gris"/>
+          </StringArray>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="typeFractalCmbBxItemStateChanged"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="typeFractalCmbBxActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
