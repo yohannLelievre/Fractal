@@ -218,7 +218,7 @@ public class MyFractalPanel extends javax.swing.JPanel {
      * methode of MyFractalPanel
      * constructs the fractal image with the DNA file.
      * This construction is based on the number of time where a coordinate is targeted.
-     * Each time a counter is incremented and finally a corresponding shade of grey is drawn
+     * Each time a counter is incremented and finally a logarithmic corresponding shade of grey is drawn
      * 
      * @param fichierADN the DNA file which is read
      * @param startBase the start position in the DNA file
@@ -230,7 +230,7 @@ public class MyFractalPanel extends javax.swing.JPanel {
     private int calculFractaleGris(String fichierADN, int startBase, int stopBase) {
         // initialisation des coordonnées fractales et de la matrice de comptage
         int matrice[][] = new int[tailleFractale][tailleFractale];  // initialise la matrice à zéro
-        int occurenceMax;                                           // correspond à la valeur max dans la matrice
+        double occurenceMax;                                           // correspond à la valeur max dans la matrice
         int x = tailleFractale/2;
         int y = tailleFractale/2;
         
@@ -292,13 +292,13 @@ public class MyFractalPanel extends javax.swing.JPanel {
             }
 
             // On identifie la valeur max dans la matrice
-            occurenceMax = maxMatrice(matrice);
+            occurenceMax = Math.log( (double)maxMatrice(matrice) );
             
             // Un point gris est ajouté à l'image fractale pour chaque élément de la matrice en fonction rapport au max
             if(occurenceMax != 0)
                 for(int i=0; i<tailleFractale; i++)
                     for(int j=0; j<tailleFractale; j++){
-                        r = 255 - ((255 * matrice[i][j]) / occurenceMax);
+                        r = 255 - (int)(255 * ( Math.log( (double)matrice[i][j]) / occurenceMax ) );
                         g = r;
                         b = r;
                         col = (r << 16) | (g << 8) | b;

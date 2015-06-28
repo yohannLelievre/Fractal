@@ -19,7 +19,9 @@ public class AffichageFractale extends javax.swing.JFrame {
     public AffichageFractale() {
         initComponents();
         startBase       = 1;
+        nbSequence      = 100000;
         nomFichier      = "";
+        pas             = 100;
         typeFractale    = 1;
     }
 
@@ -37,8 +39,8 @@ public class AffichageFractale extends javax.swing.JFrame {
         selectionFichierLbl = new javax.swing.JLabel();
         fichierBtn = new javax.swing.JButton();
         fractalePnl = new MyFractalPanel();
-        ADNScrlBr = new javax.swing.JScrollBar();
         basesLbl = new javax.swing.JLabel();
+        ADNScrlBr = new javax.swing.JScrollBar();
         nbBasesLbl = new javax.swing.JLabel();
         nbSequenceLbl = new javax.swing.JLabel();
         nbSequenceTxtFld = new javax.swing.JTextField();
@@ -46,6 +48,12 @@ public class AffichageFractale extends javax.swing.JFrame {
         debutSequenceTxtFld = new javax.swing.JTextField();
         typeFractalLbl = new javax.swing.JLabel();
         typeFractalCmbBx = new javax.swing.JComboBox();
+        CLbl = new javax.swing.JLabel();
+        GLbl = new javax.swing.JLabel();
+        ALbl = new javax.swing.JLabel();
+        TLbl = new javax.swing.JLabel();
+        pasLbl = new javax.swing.JLabel();
+        pasTxtFld = new javax.swing.JTextField();
 
         fichierADNFlChsr.setApproveButtonToolTipText("");
         fichierADNFlChsr.setCurrentDirectory(new java.io.File("C:\\Users\\yohann.lelievre\\Documents\\NetBeansProjects\\Fractale\\FractaleFolies\\genome\\hs_alt_CHM1_1.1_chr14.fa"));
@@ -57,7 +65,7 @@ public class AffichageFractale extends javax.swing.JFrame {
             }
         });
 
-        titreLbl.setFont(new java.awt.Font("Bookman Old Style", 2, 18)); // NOI18N
+        titreLbl.setFont(new java.awt.Font("Bookman Old Style", 2, 24)); // NOI18N
         titreLbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         titreLbl.setText("Balade Fractale au coeur de l'ADN");
 
@@ -77,25 +85,26 @@ public class AffichageFractale extends javax.swing.JFrame {
         fractalePnl.setLayout(fractalePnlLayout);
         fractalePnlLayout.setHorizontalGroup(
             fractalePnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 512, Short.MAX_VALUE)
         );
         fractalePnlLayout.setVerticalGroup(
             fractalePnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 512, Short.MAX_VALUE)
         );
+
+        basesLbl.setText("Nombre de bases du fichier ADN:");
 
         ADNScrlBr.setBlockIncrement(1);
         ADNScrlBr.setMaximum(1);
         ADNScrlBr.setMinimum(1);
         ADNScrlBr.setOrientation(javax.swing.JScrollBar.HORIZONTAL);
         ADNScrlBr.setToolTipText("");
+        ADNScrlBr.setUnitIncrement(100);
         ADNScrlBr.addAdjustmentListener(new java.awt.event.AdjustmentListener() {
             public void adjustmentValueChanged(java.awt.event.AdjustmentEvent evt) {
                 ADNScrlBrAdjustmentValueChanged(evt);
             }
         });
-
-        basesLbl.setText("Nombre de bases du fichier ADN:");
 
         nbBasesLbl.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         nbBasesLbl.setText("0");
@@ -147,42 +156,83 @@ public class AffichageFractale extends javax.swing.JFrame {
             }
         });
 
+        CLbl.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        CLbl.setText("C");
+
+        GLbl.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        GLbl.setText("G");
+
+        ALbl.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        ALbl.setText("A");
+
+        TLbl.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        TLbl.setText("T");
+
+        pasLbl.setText("Pas de parcours");
+
+        pasTxtFld.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
+        pasTxtFld.setText("100");
+        pasTxtFld.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                pasTxtFldFocusLost(evt);
+            }
+        });
+        pasTxtFld.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pasTxtFldActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(titreLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(CLbl)
+                            .addComponent(ALbl))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(ADNScrlBr, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(fractalePnl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(fractalePnl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(26, 26, 26)
+                        .addComponent(GLbl)
+                        .addGap(21, 21, 21)
                         .addComponent(fichierBtn)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(selectionFichierLbl, javax.swing.GroupLayout.DEFAULT_SIZE, 303, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(nbSequenceLbl)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(basesLbl, javax.swing.GroupLayout.Alignment.TRAILING)
                                         .addComponent(debutSequenceLbl)
-                                        .addComponent(typeFractalLbl)))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(nbSequenceTxtFld, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
-                                        .addComponent(nbBasesLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(debutSequenceTxtFld))
-                                    .addComponent(typeFractalCmbBx, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 0, Short.MAX_VALUE))))
+                                        .addComponent(typeFractalLbl)
+                                        .addComponent(pasLbl)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(27, 27, 27)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(nbBasesLbl, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(debutSequenceTxtFld, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(nbSequenceTxtFld, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addGap(13, 13, 13)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(pasTxtFld)
+                                            .addComponent(typeFractalCmbBx, 0, 119, Short.MAX_VALUE))))
+                                .addContainerGap(257, Short.MAX_VALUE))
+                            .addComponent(selectionFichierLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(titreLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(ADNScrlBr, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addComponent(TLbl)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -191,30 +241,45 @@ public class AffichageFractale extends javax.swing.JFrame {
                 .addComponent(titreLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(CLbl)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(ALbl))
                     .addComponent(fractalePnl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(fichierBtn)
-                            .addComponent(selectionFichierLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(basesLbl)
-                            .addComponent(nbBasesLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(nbSequenceLbl)
-                            .addComponent(nbSequenceTxtFld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(debutSequenceLbl)
-                            .addComponent(debutSequenceTxtFld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(typeFractalLbl)
-                            .addComponent(typeFractalCmbBx, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(ADNScrlBr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(60, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(fichierBtn)
+                                .addComponent(selectionFichierLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(GLbl))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(basesLbl)
+                                    .addComponent(nbBasesLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(nbSequenceLbl)
+                                    .addComponent(nbSequenceTxtFld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(debutSequenceLbl)
+                                    .addComponent(debutSequenceTxtFld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(pasLbl)
+                                    .addComponent(pasTxtFld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(typeFractalLbl)
+                                    .addComponent(typeFractalCmbBx, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(TLbl)))))
+                .addGap(18, 18, 18)
+                .addComponent(ADNScrlBr, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(46, 46, 46))
         );
 
         pack();
@@ -223,7 +288,6 @@ public class AffichageFractale extends javax.swing.JFrame {
     
     private void fichierBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fichierBtnActionPerformed
         int o = fichierADNFlChsr.showOpenDialog(this);
-        int nbSequence;
         if (o == JFileChooser.APPROVE_OPTION){
             java.io.File f = fichierADNFlChsr.getSelectedFile();
             nomFichier = f.getAbsolutePath();
@@ -241,7 +305,9 @@ public class AffichageFractale extends javax.swing.JFrame {
 
     private void nbSequenceTxtFldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nbSequenceTxtFldActionPerformed
         try {
-            int nbSequence = Integer.parseInt(nbSequenceTxtFld.getText());
+            nbSequence = Integer.parseInt(nbSequenceTxtFld.getText());
+            if (nbSequence < pas)
+                pas = nbSequence;
             if (!nomFichier.equals("")) {
                 if (ADNScrlBr.getValue() > (nbBases-nbSequence+1)){
                     ADNScrlBr.setValue((nbBases-nbSequence+1));
@@ -264,7 +330,6 @@ public class AffichageFractale extends javax.swing.JFrame {
     private void debutSequenceTxtFldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_debutSequenceTxtFldActionPerformed
         try {
             int test = Integer.parseInt(debutSequenceTxtFld.getText());
-            int nbSequence = Integer.parseInt(nbSequenceTxtFld.getText());
             if (test > (nbBases-nbSequence+1)){
                 javax.swing.JOptionPane.showMessageDialog(null,"Veuillez saisir un entier positif inférieur ou égal à "+(nbBases-nbSequence+1)+".");
                 setVisible(true);
@@ -289,7 +354,6 @@ public class AffichageFractale extends javax.swing.JFrame {
         startBase = ADNScrlBr.getValue();
         debutSequenceTxtFld.setText(""+startBase);
         if (!nomFichier.equals("")) {
-            int nbSequence = Integer.parseInt(nbSequenceTxtFld.getText());
             ((MyFractalPanel) fractalePnl).calculFractale(nomFichier, (startBase-1), (startBase+nbSequence-1), typeFractale);
             fractalePnl.repaint();
         }
@@ -297,7 +361,9 @@ public class AffichageFractale extends javax.swing.JFrame {
 
     private void nbSequenceTxtFldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nbSequenceTxtFldFocusLost
         try {
-            int nbSequence = Integer.parseInt(nbSequenceTxtFld.getText());
+            nbSequence = Integer.parseInt(nbSequenceTxtFld.getText());
+            if (nbSequence < pas)
+                pas = nbSequence;
             if (!nomFichier.equals("")) {
                 if (ADNScrlBr.getValue() > (nbBases-nbSequence+1)){
                     ADNScrlBr.setValue((nbBases-nbSequence+1));
@@ -317,7 +383,6 @@ public class AffichageFractale extends javax.swing.JFrame {
     private void debutSequenceTxtFldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_debutSequenceTxtFldFocusLost
         try {
             int test = Integer.parseInt(debutSequenceTxtFld.getText());
-            int nbSequence = Integer.parseInt(nbSequenceTxtFld.getText());
             if (test > (nbBases-nbSequence+1)){
                 javax.swing.JOptionPane.showMessageDialog(null,"Veuillez saisir un entier positif inférieur ou égal à "+(nbBases-nbSequence+1)+".");
                 setVisible(true);
@@ -339,7 +404,6 @@ public class AffichageFractale extends javax.swing.JFrame {
     }//GEN-LAST:event_debutSequenceTxtFldFocusLost
 
     private void typeFractalCmbBxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_typeFractalCmbBxActionPerformed
-        int nbSequence = Integer.parseInt(nbSequenceTxtFld.getText());
         
         typeFractale = typeFractalCmbBx.getSelectedIndex() + 1;
         if (!nomFichier.equals("")) {
@@ -349,7 +413,6 @@ public class AffichageFractale extends javax.swing.JFrame {
     }//GEN-LAST:event_typeFractalCmbBxActionPerformed
 
     private void typeFractalCmbBxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_typeFractalCmbBxItemStateChanged
-        int nbSequence = Integer.parseInt(nbSequenceTxtFld.getText());
         
         typeFractale = typeFractalCmbBx.getSelectedIndex() + 1;
         if (!nomFichier.equals("")) {
@@ -357,6 +420,50 @@ public class AffichageFractale extends javax.swing.JFrame {
             fractalePnl.repaint();
         }
     }//GEN-LAST:event_typeFractalCmbBxItemStateChanged
+
+    private void pasTxtFldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pasTxtFldActionPerformed
+        try {
+            pas = Integer.parseInt(pasTxtFld.getText());
+            if (pas <= 0){
+                javax.swing.JOptionPane.showMessageDialog(null,"Veuillez saisir un entier positif inférieur à "+nbSequence+".");
+                setVisible(true);
+                debutSequenceTxtFld.requestFocus();
+            }else{
+                ADNScrlBr.setUnitIncrement(pas);
+                if (!nomFichier.equals("")) {
+                    ((MyFractalPanel) fractalePnl).calculFractale(nomFichier, (startBase-1), (startBase+nbSequence-1), typeFractale);
+                    fractalePnl.repaint();
+                }
+            }
+
+        } catch (NumberFormatException e){
+            javax.swing.JOptionPane.showMessageDialog(null,"Veuillez saisir un entier positif.");
+            setVisible(true);
+            pasTxtFld.requestFocus();
+        }
+    }//GEN-LAST:event_pasTxtFldActionPerformed
+
+    private void pasTxtFldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_pasTxtFldFocusLost
+        try {
+            pas = Integer.parseInt(pasTxtFld.getText());
+            if (pas <= 0){
+                javax.swing.JOptionPane.showMessageDialog(null,"Veuillez saisir un entier positif inférieur à "+nbSequence+".");
+                setVisible(true);
+                debutSequenceTxtFld.requestFocus();
+            }else{
+                ADNScrlBr.setUnitIncrement(pas);
+                if (!nomFichier.equals("")) {
+                    ((MyFractalPanel) fractalePnl).calculFractale(nomFichier, (startBase-1), (startBase+nbSequence-1), typeFractale);
+                    fractalePnl.repaint();
+                }
+            }
+
+        } catch (NumberFormatException e){
+            javax.swing.JOptionPane.showMessageDialog(null,"Veuillez saisir un entier positif.");
+            setVisible(true);
+            pasTxtFld.requestFocus();
+        }
+    }//GEN-LAST:event_pasTxtFldFocusLost
 
     
     /**
@@ -396,11 +503,17 @@ public class AffichageFractale extends javax.swing.JFrame {
     
     private String nomFichier;
     private int startBase;
+    private int nbSequence;
     private int nbBases;
+    private int pas;
     private int typeFractale;
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollBar ADNScrlBr;
+    private javax.swing.JLabel ALbl;
+    private javax.swing.JLabel CLbl;
+    private javax.swing.JLabel GLbl;
+    private javax.swing.JLabel TLbl;
     private javax.swing.JLabel basesLbl;
     private javax.swing.JLabel debutSequenceLbl;
     private javax.swing.JTextField debutSequenceTxtFld;
@@ -410,6 +523,8 @@ public class AffichageFractale extends javax.swing.JFrame {
     private javax.swing.JLabel nbBasesLbl;
     private javax.swing.JLabel nbSequenceLbl;
     private javax.swing.JTextField nbSequenceTxtFld;
+    private javax.swing.JLabel pasLbl;
+    private javax.swing.JTextField pasTxtFld;
     private javax.swing.JLabel selectionFichierLbl;
     private javax.swing.JLabel titreLbl;
     private javax.swing.JComboBox typeFractalCmbBx;
