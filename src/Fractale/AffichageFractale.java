@@ -55,7 +55,7 @@ public class AffichageFractale extends javax.swing.JFrame {
         pasLbl = new javax.swing.JLabel();
         pasTxtFld = new javax.swing.JTextField();
         dimensionFractaleLbl = new javax.swing.JLabel();
-        dimesionFractaleTxtFld = new javax.swing.JTextField();
+        dimensionFractaleTxtFld = new javax.swing.JTextField();
 
         fichierADNFlChsr.setApproveButtonToolTipText("");
         fichierADNFlChsr.setCurrentDirectory(new java.io.File("C:\\Users\\yohann.lelievre\\Documents\\NetBeansProjects\\Fractale\\FractaleFolies\\genome\\hs_alt_CHM1_1.1_chr14.fa"));
@@ -187,9 +187,9 @@ public class AffichageFractale extends javax.swing.JFrame {
 
         dimensionFractaleLbl.setText("Dimension fractale apparante (Minkowski–Bouligand):");
 
-        dimesionFractaleTxtFld.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
-        dimesionFractaleTxtFld.setToolTipText("");
-        dimesionFractaleTxtFld.setEnabled(false);
+        dimensionFractaleTxtFld.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
+        dimensionFractaleTxtFld.setToolTipText("");
+        dimensionFractaleTxtFld.setEnabled(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -221,8 +221,8 @@ public class AffichageFractale extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(dimensionFractaleLbl)
-                                .addGap(27, 27, 27)
-                                .addComponent(dimesionFractaleTxtFld, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(dimensionFractaleTxtFld, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(nbSequenceLbl)
@@ -242,8 +242,8 @@ public class AffichageFractale extends javax.swing.JFrame {
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                         .addGap(13, 13, 13)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(pasTxtFld)
-                                            .addComponent(typeFractalCmbBx, 0, 119, Short.MAX_VALUE))))))
+                                            .addComponent(typeFractalCmbBx, 0, 119, Short.MAX_VALUE)
+                                            .addComponent(pasTxtFld))))))
                         .addContainerGap(257, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
@@ -291,7 +291,7 @@ public class AffichageFractale extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(dimensionFractaleLbl)
-                                    .addComponent(dimesionFractaleTxtFld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                    .addComponent(dimensionFractaleTxtFld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addGap(18, 18, 18)
                 .addComponent(ADNScrlBr, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(46, 46, 46))
@@ -312,6 +312,7 @@ public class AffichageFractale extends javax.swing.JFrame {
             fractale = new ObjetFractale(nomFichier);
             nbBases = fractale.getNombreBase();
             ((MyFractalPanel) fractalePnl).calculFractale(fractale, (startBase-1), (startBase+nbSequence-1), typeFractale);
+            dimensionFractaleTxtFld.setText(String.format("%.3f",fractale.getDimensionFractale()));
             fractalePnl.repaint();
             nbBasesLbl.setText(""+nbBases);
             ADNScrlBr.setMaximum((nbBases-nbSequence+1));
@@ -331,6 +332,7 @@ public class AffichageFractale extends javax.swing.JFrame {
                 }
                 ADNScrlBr.setMaximum((nbBases-nbSequence+1));
                 ((MyFractalPanel) fractalePnl).calculFractale(fractale, (startBase-1), (startBase+nbSequence-1), typeFractale);
+                dimensionFractaleTxtFld.setText(String.format("%.3f",fractale.getDimensionFractale()));
                 fractalePnl.repaint();
             }
 
@@ -356,6 +358,7 @@ public class AffichageFractale extends javax.swing.JFrame {
                 ADNScrlBr.setValue(startBase);
                 if (!nomFichier.equals("")) {
                     ((MyFractalPanel) fractalePnl).calculFractale(fractale, (startBase-1), (startBase+nbSequence-1), typeFractale);
+                    dimensionFractaleTxtFld.setText(String.format("%.3f",fractale.getDimensionFractale()));
                     fractalePnl.repaint();
                 }
             }
@@ -372,6 +375,7 @@ public class AffichageFractale extends javax.swing.JFrame {
         debutSequenceTxtFld.setText(""+startBase);
         if (!nomFichier.equals("")) {
             ((MyFractalPanel) fractalePnl).calculFractale(fractale, (startBase-1), (startBase+nbSequence-1), typeFractale);
+            dimensionFractaleTxtFld.setText(String.format("%.3f",fractale.getDimensionFractale()));
             fractalePnl.repaint();
         }
     }//GEN-LAST:event_ADNScrlBrAdjustmentValueChanged
@@ -387,6 +391,7 @@ public class AffichageFractale extends javax.swing.JFrame {
                 }
                 ADNScrlBr.setMaximum((nbBases-nbSequence+1));
                 ((MyFractalPanel) fractalePnl).calculFractale(fractale, (startBase-1), (startBase+nbSequence-1), typeFractale);
+                dimensionFractaleTxtFld.setText(String.format("%.3f",fractale.getDimensionFractale()));
                 fractalePnl.repaint();
             }
 
@@ -409,6 +414,7 @@ public class AffichageFractale extends javax.swing.JFrame {
                 ADNScrlBr.setValue(startBase);
                 if (!nomFichier.equals("")) {
                     ((MyFractalPanel) fractalePnl).calculFractale(fractale, (startBase-1), (startBase+nbSequence-1), typeFractale);
+                    dimensionFractaleTxtFld.setText(String.format("%.3f",fractale.getDimensionFractale()));
                     fractalePnl.repaint();
                 }
             }
@@ -425,6 +431,7 @@ public class AffichageFractale extends javax.swing.JFrame {
         typeFractale = typeFractalCmbBx.getSelectedIndex() + 1;
         if (!nomFichier.equals("")) {
             ((MyFractalPanel) fractalePnl).calculFractale(fractale, (startBase-1), (startBase+nbSequence-1), typeFractale);
+            dimensionFractaleTxtFld.setText(String.format("%.3f",fractale.getDimensionFractale()));
             fractalePnl.repaint();
         }
     }//GEN-LAST:event_typeFractalCmbBxActionPerformed
@@ -434,6 +441,7 @@ public class AffichageFractale extends javax.swing.JFrame {
         typeFractale = typeFractalCmbBx.getSelectedIndex() + 1;
         if (!nomFichier.equals("")) {
             ((MyFractalPanel) fractalePnl).calculFractale(fractale, (startBase-1), (startBase+nbSequence-1), typeFractale);
+            dimensionFractaleTxtFld.setText(String.format("%.3f",fractale.getDimensionFractale()));
             fractalePnl.repaint();
         }
     }//GEN-LAST:event_typeFractalCmbBxItemStateChanged
@@ -449,6 +457,7 @@ public class AffichageFractale extends javax.swing.JFrame {
                 ADNScrlBr.setUnitIncrement(pas);
                 if (!nomFichier.equals("")) {
                     ((MyFractalPanel) fractalePnl).calculFractale(fractale, (startBase-1), (startBase+nbSequence-1), typeFractale);
+                    dimensionFractaleTxtFld.setText(String.format("%.3f",fractale.getDimensionFractale()));
                     fractalePnl.repaint();
                 }
             }
@@ -471,6 +480,7 @@ public class AffichageFractale extends javax.swing.JFrame {
                 ADNScrlBr.setUnitIncrement(pas);
                 if (!nomFichier.equals("")) {
                     ((MyFractalPanel) fractalePnl).calculFractale(fractale, (startBase-1), (startBase+nbSequence-1), typeFractale);
+                    dimensionFractaleTxtFld.setText(String.format("%.3f",fractale.getDimensionFractale()));
                     fractalePnl.repaint();
                 }
             }
@@ -536,7 +546,7 @@ public class AffichageFractale extends javax.swing.JFrame {
     private javax.swing.JLabel debutSequenceLbl;
     private javax.swing.JTextField debutSequenceTxtFld;
     private javax.swing.JLabel dimensionFractaleLbl;
-    private javax.swing.JTextField dimesionFractaleTxtFld;
+    private javax.swing.JTextField dimensionFractaleTxtFld;
     private javax.swing.JFileChooser fichierADNFlChsr;
     private javax.swing.JButton fichierBtn;
     private javax.swing.JPanel fractalePnl;

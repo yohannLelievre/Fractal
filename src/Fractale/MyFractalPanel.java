@@ -121,6 +121,29 @@ public class MyFractalPanel extends javax.swing.JPanel {
     
      /**
      * methode of MyFractalPanel
+     * Calculates the value of the Minkowski–Bouligand dimension
+     * 
+     * @param Nepsi a parameter requiered to calculate the Minkowski–Bouligand dimension
+     * 
+     * @return the value of the Minkowski–Bouligand dimension
+     * 
+    */
+    private double calculDimension(int Nepsi) {
+        double dimensionF;
+        
+        dimensionF = java.lang.Math.log10( (double)Nepsi ) / java.lang.Math.log10( (double)tailleFractale );
+        
+        //Debug
+        System.out.println("Le N epsilon est : " + Nepsi);
+        System.out.println("La dimension fractale est : " + dimensionF);
+    
+        return dimensionF;
+        
+    }
+
+    
+     /**
+     * methode of MyFractalPanel
      * constructs the fractal image with the DNA file.
      * This construction is based on the number of time where a coordinate is targeted.
      * Each time a counter is incremented and finally a corresponding shade of grey is drawn
@@ -133,7 +156,9 @@ public class MyFractalPanel extends javax.swing.JPanel {
      * 
      */
     private void calculFractaleNB(ObjetFractale fractale, int startBase, int stopBase) {
-        // initialisation des coordonnées fractales
+        // initialisation des coordonnées fractales et de la matrice de comptage
+        int matrice[][] = new int[tailleFractale][tailleFractale];  // initialise la matrice à zéro
+        int Nepsilon=0;                                             // variable de calcul de la dimension fractal
         int x = tailleFractale/2;
         int y = tailleFractale/2;
         
@@ -178,13 +203,21 @@ public class MyFractalPanel extends javax.swing.JPanel {
                 default:
             }
                 
+            // On incrémente le compteur au niveau de la coordonnée sélectionnée
+            matrice[x][y]++;
+            // pour chaque nouveau point on incrémente Nepsilon de tel sorte que Nepsilon représente la surface du motif fractal
+            if(matrice[x][y]==1) Nepsilon++;
+            
             // On ajoute un point blanc au niveau de la coordonnée sélectionnée
             imageFractale.setRGB(x, y, col);
 
             base = (char)fractale.fastaBuff.get();
             nombreBase++;
         }
-               
+
+        // calcul de la dimension fractale
+        fractale.setDimensionFractale( calculDimension(Nepsilon) );
+
         //Debug
         //System.out.println("Le nombre de base : " + (size-entete)+" et la taille de l'entete : "+entete);
         
@@ -206,7 +239,8 @@ public class MyFractalPanel extends javax.swing.JPanel {
     private void calculFractaleGris(ObjetFractale fractale, int startBase, int stopBase) {
         // initialisation des coordonnées fractales et de la matrice de comptage
         int matrice[][] = new int[tailleFractale][tailleFractale];  // initialise la matrice à zéro
-        double occurenceMax;                                           // correspond à la valeur max dans la matrice
+        double occurenceMax;                                        // correspond à la valeur max dans la matrice
+        int Nepsilon=0;                                         // variable de calcul de la dimension fractal
         int x = tailleFractale/2;
         int y = tailleFractale/2;
         
@@ -252,12 +286,17 @@ public class MyFractalPanel extends javax.swing.JPanel {
 
             // On incrémente le compteur au niveau de la coordonnée sélectionnée
             matrice[x][y]++;
+            // pour chaque nouveau point on incrémente Nepsilon de tel sorte que Nepsilon représente la surface du motif fractal
+            if(matrice[x][y]==1) Nepsilon++;
 
             base = (char)fractale.fastaBuff.get();
             nombreBase++;
         }
 
-        // On identifie la valeur max dans la matrice
+        // calcul de la dimension fractale
+        fractale.setDimensionFractale( calculDimension(Nepsilon) );
+        
+        // On identifie la valeur max dans la matrice et on en calcule le logarithme néperien
         occurenceMax = Math.log( (double)maxMatrice(matrice) );
 
         // Un point gris est ajouté à l'image fractale pour chaque élément de la matrice en fonction rapport au max
@@ -296,6 +335,7 @@ public class MyFractalPanel extends javax.swing.JPanel {
     private void calculFractaleCouleur(ObjetFractale fractale, int startBase, int stopBase) {
         // initialisation des coordonnées fractales et de la matrice de comptage
         int matrice[][] = new int[tailleFractale][tailleFractale];  // initialise la matrice à zéro
+        int Nepsilon=0;                                             // variable de calcul de la dimension fractal
         int differenceMax;                                          // correspond à la valeur max dans la matrice soustraite
         int differenceMin;                                          // correspond à la valeur min dans la matrice soustraite
         int x = tailleFractale/2;
@@ -343,11 +383,16 @@ public class MyFractalPanel extends javax.swing.JPanel {
 
             // On incrémente le compteur au niveau de la coordonnée sélectionnée
             matrice[x][y]++;
+            // pour chaque nouveau point on incrémente Nepsilon de tel sorte que Nepsilon représente la surface du motif fractal
+            if(matrice[x][y]==1) Nepsilon++;
 
             base = (char)fractale.fastaBuff.get();
             nombreBase++;
         }
 
+        // calcul de la dimension fractale
+        fractale.setDimensionFractale( calculDimension(Nepsilon) );
+        
         // On soustrait la matrice précédente à la matrice nouvellement calculée
         matrice = soustractionMatricePrecedente(matrice);
 
@@ -355,7 +400,7 @@ public class MyFractalPanel extends javax.swing.JPanel {
         differenceMax = maxMatrice(matrice);
         differenceMin = minMatrice(matrice);
 
-        // Un point gris est ajouté à l'image fractale pour chaque élément de la matrice en fonction du rapport au max pour les valeurs positives et au min pour les valeurs négatives
+        // Un point de couleur est ajouté à l'image fractale pour chaque élément de la matrice en fonction du rapport au max pour les valeurs positives et au min pour les valeurs négatives
         if((differenceMax != 0) && (differenceMin != 0))
             for(int i=0; i<tailleFractale; i++)
                 for(int j=0; j<tailleFractale; j++){

@@ -68,8 +68,8 @@
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Group type="102" attributes="0">
                               <Component id="dimensionFractaleLbl" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-                              <Component id="dimesionFractaleTxtFld" min="-2" pref="34" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="dimensionFractaleTxtFld" min="-2" pref="57" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -95,8 +95,8 @@
                                   <Group type="102" alignment="1" attributes="0">
                                       <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="pasTxtFld" max="32767" attributes="0"/>
                                           <Component id="typeFractalCmbBx" pref="119" max="32767" attributes="0"/>
+                                          <Component id="pasTxtFld" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -162,7 +162,7 @@
                               <EmptySpace max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="dimensionFractaleLbl" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="dimesionFractaleTxtFld" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="dimensionFractaleTxtFld" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -353,7 +353,7 @@
         <Property name="text" type="java.lang.String" value="Dimension fractale apparante (Minkowski&#x2013;Bouligand):"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="dimesionFractaleTxtFld">
+    <Component class="javax.swing.JTextField" name="dimensionFractaleTxtFld">
       <Properties>
         <Property name="horizontalAlignment" type="int" value="11"/>
         <Property name="toolTipText" type="java.lang.String" value=""/>

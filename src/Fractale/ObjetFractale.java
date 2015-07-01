@@ -42,6 +42,7 @@ public class ObjetFractale {
             nombreBase = size-entete;
             fastaBuff = ByteBuffer.allocate(nombreBase);
             fastaBuff = bBuff.slice();
+            dimensionFractale = 0;
             
             
         } catch (IOException e) {
