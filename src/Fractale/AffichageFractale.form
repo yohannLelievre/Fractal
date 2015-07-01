@@ -54,12 +54,23 @@
               </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
                       <Component id="GLbl" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                       <Component id="fichierBtn" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
+                  </Group>
+                  <Component id="TLbl" alignment="0" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="selectionFichierLbl" max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="dimensionFractaleLbl" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                              <Component id="dimesionFractaleTxtFld" min="-2" pref="34" max="-2" attributes="0"/>
+                          </Group>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="nbSequenceLbl" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -89,14 +100,9 @@
                                       </Group>
                                   </Group>
                               </Group>
-                              <EmptySpace pref="257" max="32767" attributes="0"/>
                           </Group>
-                          <Component id="selectionFichierLbl" max="32767" attributes="0"/>
                       </Group>
-                  </Group>
-                  <Group type="102" attributes="0">
-                      <Component id="TLbl" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <EmptySpace pref="257" max="32767" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -125,6 +131,10 @@
                       </Group>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              <Component id="TLbl" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="basesLbl" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="nbBasesLbl" alignment="3" min="-2" pref="14" max="-2" attributes="0"/>
@@ -149,11 +159,11 @@
                                   <Component id="typeFractalLbl" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="typeFractalCmbBx" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                              <Component id="TLbl" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="dimensionFractaleLbl" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="dimesionFractaleTxtFld" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                       </Group>
                   </Group>
@@ -337,6 +347,18 @@
         <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="pasTxtFldFocusLost"/>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="pasTxtFldActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="dimensionFractaleLbl">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Dimension fractale apparante (Minkowski&#x2013;Bouligand):"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="dimesionFractaleTxtFld">
+      <Properties>
+        <Property name="horizontalAlignment" type="int" value="11"/>
+        <Property name="toolTipText" type="java.lang.String" value=""/>
+        <Property name="enabled" type="boolean" value="false"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>
