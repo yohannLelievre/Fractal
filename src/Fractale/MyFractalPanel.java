@@ -134,8 +134,8 @@ public class MyFractalPanel extends javax.swing.JPanel {
         dimensionF = java.lang.Math.log10( (double)Nepsi ) / java.lang.Math.log10( (double)tailleFractale );
         
         //Debug
-        System.out.println("Le N epsilon est : " + Nepsi);
-        System.out.println("La dimension fractale est : " + dimensionF);
+        //System.out.println("Le N epsilon est : " + Nepsi);
+        //System.out.println("La dimension fractale est : " + dimensionF);
     
         return dimensionF;
         
@@ -169,14 +169,14 @@ public class MyFractalPanel extends javax.swing.JPanel {
         int col = (r << 16) | (g << 8) | b;
 
         
-        fractale.fastaBuff.rewind();
+        fractale.getFastaBuff().rewind();
         char base=0;                                    // caractère lu dans le buffeur
         int nombreBase = 1;                             // pointeur des bases ADN lues dans le buffeur
         this.reInit();
             
         // On passe les 'startBase-1' premières bases du fichier FastA
         while(nombreBase < startBase){
-            base = (char)fractale.fastaBuff.get();
+            base = (char)fractale.getFastaBuff().get();
             nombreBase++;
         }
         // On lit chaque base d'ADN du fichier jusqu'à la 'stopBase' ième base
@@ -211,7 +211,7 @@ public class MyFractalPanel extends javax.swing.JPanel {
             // On ajoute un point blanc au niveau de la coordonnée sélectionnée
             imageFractale.setRGB(x, y, col);
 
-            base = (char)fractale.fastaBuff.get();
+            base = (char)fractale.getFastaBuff().get();
             nombreBase++;
         }
 
@@ -250,14 +250,14 @@ public class MyFractalPanel extends javax.swing.JPanel {
         int b;
         int col;
         
-        fractale.fastaBuff.rewind();
+        fractale.getFastaBuff().rewind();
         char base=0;                                    // caractère lu dans le buffeur
         int nombreBase = 1;                             // pointeur des bases ADN lues dans le buffeur
         this.reInit();
 
         // On passe les 'startBase-1' premières bases du fichier FastA
         while(nombreBase < startBase){
-            base = (char)fractale.fastaBuff.get();
+            base = (char)fractale.getFastaBuff().get();
             nombreBase++;
         }
         // On lit chaque base d'ADN du fichier jusqu'à la 'stopBase' ième base
@@ -289,7 +289,7 @@ public class MyFractalPanel extends javax.swing.JPanel {
             // pour chaque nouveau point on incrémente Nepsilon de tel sorte que Nepsilon représente la surface du motif fractal
             if(matrice[x][y]==1) Nepsilon++;
 
-            base = (char)fractale.fastaBuff.get();
+            base = (char)fractale.getFastaBuff().get();
             nombreBase++;
         }
 
@@ -347,14 +347,14 @@ public class MyFractalPanel extends javax.swing.JPanel {
         int b;
         int col;
         
-        fractale.fastaBuff.rewind();
+        fractale.getFastaBuff().rewind();
         char base=0;                                    // caractère lu dans le buffeur
         int nombreBase = 1;                             // pointeur des bases ADN lues dans le buffeur
         this.reInit();
 
         // On passe les 'startBase-1' premières bases du fichier FastA
         while(nombreBase < startBase){
-            base = (char)fractale.fastaBuff.get();
+            base = (char)fractale.getFastaBuff().get();
             nombreBase++;
         }
         // On lit chaque base d'ADN du fichier jusqu'à la 'stopBase' ième base
@@ -386,7 +386,7 @@ public class MyFractalPanel extends javax.swing.JPanel {
             // pour chaque nouveau point on incrémente Nepsilon de tel sorte que Nepsilon représente la surface du motif fractal
             if(matrice[x][y]==1) Nepsilon++;
 
-            base = (char)fractale.fastaBuff.get();
+            base = (char)fractale.getFastaBuff().get();
             nombreBase++;
         }
 

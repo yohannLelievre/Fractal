@@ -15,10 +15,14 @@ import java.nio.channels.FileChannel;
  * @author yohann.lelievre
  */
 public class ObjetFractale {
-    
+
     private int nombreBase;
     private double dimensionFractale;
-    public ByteBuffer fastaBuff;
+    private ByteBuffer fastaBuff;
+    
+    public ByteBuffer getFastaBuff() {
+        return fastaBuff;
+    }
     
      /**
      * Constructor of ObjetFractale 
