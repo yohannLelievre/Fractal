@@ -6,7 +6,7 @@
 package Fractale;
 
 
-/**
+/** This class is a JPanel in which fractal graphics can be calculated and displayed.
  *
  * @author yohann.lelievre
  */
@@ -14,7 +14,7 @@ public class MyFractalPanel extends javax.swing.JPanel {
     
     
      /**
-     * Constructor of MyFractalPanel 
+     * Constructor of MyFractalPanel. 
      * 
      */
     public MyFractalPanel() {
@@ -24,8 +24,8 @@ public class MyFractalPanel extends javax.swing.JPanel {
 
 
      /**
-     * methode of MyFractalPanel
-     * draw the fractal image obtain with the DNA file in the frame of a JPanel object
+     * Method of MyFractalPanel.
+     * Draw the fractal image obtain with the DNA file in the frame of a JPanel object.
      * 
      * @param g the graphics that will be drawn
      * 
@@ -38,8 +38,8 @@ public class MyFractalPanel extends javax.swing.JPanel {
 
 
      /**
-     * methode of MyFractalPanel
-     * clear the BufferedImage
+     * Method of MyFractalPanel.
+     * Clear the BufferedImage.
      * 
      */
     public void reInit() {
@@ -51,8 +51,8 @@ public class MyFractalPanel extends javax.swing.JPanel {
 
 
      /**
-     * methode of MyFractalPanel
-     * find the maximal integer in a 2D matrix
+     * Method of MyFractalPanel.
+     * Find the maximal integer in a 2D matrix.
      * 
      * @param laMatrice the matrix in which we are looking for the max value
      * 
@@ -71,8 +71,8 @@ public class MyFractalPanel extends javax.swing.JPanel {
 
     
      /**
-     * methode of MyFractalPanel
-     * find the minimal integer in a 2D matrix
+     * Method of MyFractalPanel.
+     * Find the minimal integer in a 2D matrix.
      * 
      * @param laMatrice the matrix in which we are looking for the min value
      * 
@@ -91,7 +91,7 @@ public class MyFractalPanel extends javax.swing.JPanel {
 
     
      /**
-     * methode of MyFractalPanel
+     * Method of MyFractalPanel.
      * Substracts the matrix matricePrecedente to the matrix in parameter.
      * Returns the result in matricePrecedente.
      * Reinitializes matricePrecedente with the values of laMatrice.
@@ -116,8 +116,8 @@ public class MyFractalPanel extends javax.swing.JPanel {
 
     
      /**
-     * methode of MyFractalPanel
-     * Calculates the value of the Minkowski–Bouligand dimension
+     * Method of MyFractalPanel.
+     * Calculates the value of the Minkowski–Bouligand dimension.
      * 
      * @param Nepsi a parameter requiered to calculate the Minkowski–Bouligand dimension
      * 
@@ -135,10 +135,10 @@ public class MyFractalPanel extends javax.swing.JPanel {
 
     
      /**
-     * methode of MyFractalPanel
+     * Method of MyFractalPanel.
      * constructs the fractal image with the DNA file.
      * This construction is based on the number of time where a new coordinate is targeted.
-     * Each time a new coordinate is targeted a black point is drawn
+     * Each time a new coordinate is targeted a black point is drawn.
      * 
      * @param fractale the fractal object which contains the DNA buffer as well as the size of the DNA file and the last calculated Minkowski–Bouligand dimension
      * @param startBase the start position in the DNA file
@@ -214,10 +214,10 @@ public class MyFractalPanel extends javax.swing.JPanel {
     
     
      /**
-     * methode of MyFractalPanel
-     * constructs the fractal image with the DNA file.
+     * Method of MyFractalPanel.
+     * Constructs the fractal image with the DNA file.
      * This construction is based on the number of time where a coordinate is targeted.
-     * Each time a counter is incremented and finally a logarithmic corresponding shade of grey is drawn
+     * Each time a counter is incremented and finally a logarithmic corresponding shade of grey is drawn.
      * 
      * @param fractale the fractal object which contains the DNA buffer as well as the size of the DNA file and the last calculated Minkowski–Bouligand dimension
      * @param startBase the start position in the DNA file
@@ -303,13 +303,13 @@ public class MyFractalPanel extends javax.swing.JPanel {
 
     
      /**
-     * methode of MyFractalPanel
-     * constructs the fractal image with the DNA file.
+     * Method of MyFractalPanel.
+     * Constructs the fractal image with the DNA file.
      * This construction is based on the number of time where a coordinate is targeted.
      * Each time a counter is incremented. Then the difference is done with the previous calculated matrix.
      * And finally a corresponding shade of red or blue is drawn.
-     * The more red it is, the more the frequence of a DNA word increases
-     * The more blue it is, the more the frequence of a DNA word decreases
+     * The more red it is, the more the frequence of a DNA word increases.
+     * The more blue it is, the more the frequence of a DNA word decreases.
      * 
      * @param fractale the fractal object which contains the DNA buffer as well as the size of the DNA file and the last calculated Minkowski–Bouligand dimension
      * @param startBase the start position in the DNA file
@@ -425,8 +425,8 @@ public class MyFractalPanel extends javax.swing.JPanel {
 
     
      /**
-     * methode of MyFractalPanel
-     * constructs the fractal image with the DNA file depending of the type of representation desired
+     * Method of MyFractalPanel.
+     * Constructs the fractal image with the DNA file depending of the type of representation desired.
      * 
      * @param fractale the fractal object which contains the DNA buffer as well as the size of the DNA file and the last calculated Minkowski–Bouligand dimension
      * @param startBase the start position in the DNA file

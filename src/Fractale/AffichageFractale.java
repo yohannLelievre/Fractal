@@ -7,7 +7,7 @@ package Fractale;
 
 import javax.swing.JFileChooser;
 
-/**
+/** This class allows the display of fractal graphics using a dedicated JPanel (see MyFractalPanel)
  *
  * @author yohann.lelievre
  */

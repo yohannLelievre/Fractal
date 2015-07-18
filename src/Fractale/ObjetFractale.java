@@ -20,12 +20,8 @@ public class ObjetFractale {
     private double dimensionFractale;
     private ByteBuffer fastaBuff;
     
-    public ByteBuffer getFastaBuff() {
-        return fastaBuff;
-    }
-    
      /**
-     * Constructor of ObjetFractale 
+     * Constructor of ObjetFractale.
      * 
      * @param fichierADN the name of the FastA file which contains the DNA list
      * 
@@ -56,7 +52,17 @@ public class ObjetFractale {
     }
     
      /**
-     * Setter of dimension 
+     * Getter of fastaBuff.
+     * 
+     * @return the buffer which contains the DNA bases read in the FastA file
+     * 
+     */
+    public ByteBuffer getFastaBuff() {
+        return fastaBuff;
+    }
+    
+     /**
+     * Setter of dimension.
      * 
      * @param dimension the value corresponding to the apparent fractal dimension
      * 
@@ -66,7 +72,7 @@ public class ObjetFractale {
     }
     
      /**
-     * Getter of nombreBase 
+     * Getter of nombreBase.
      * 
      * @return the number of DNA base read in the FastA file
      * 
@@ -76,7 +82,7 @@ public class ObjetFractale {
     }
     
      /**
-     * Getter of dimensionFractale 
+     * Getter of dimensionFractale.
      * 
      * @return the value corresponding to the apparent fractal dimension
      * 
