@@ -18,11 +18,11 @@ public class AffichageFractale extends javax.swing.JFrame {
      */
     public AffichageFractale() {
         initComponents();
-        startBase       = 1;
-        nbSequence      = 100000;
-        nomFichier      = "";
-        pas             = 100;
-        typeFractale    = 1;
+        startBase       = 1;            // Début de la séquence ADN lue
+        nbSequence      = 100000;       // Longueur de la séquence ADN lue
+        nomFichier      = "";           // Nom du fichier et chemin d'accès de la séquence ADN étudiée
+        pas             = 100;          // Pas de lecture entre 2 déplacement de la scroll bar
+        typeFractale    = 1;            // Type d'analyse facale (Par défaut: analyse en noir et blanc)
     }
 
     /**
@@ -301,6 +301,11 @@ public class AffichageFractale extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     
+    /**
+     * Method of AffichageFractale
+     * When the button fichierBtn is perfomed, a file chooser dialog box is opened.
+     * If the file is valid, the fractal and its dimension is generated and displayed
+     */
     private void fichierBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fichierBtnActionPerformed
         int o = fichierADNFlChsr.showOpenDialog(this);
         if (o == JFileChooser.APPROVE_OPTION){
@@ -321,23 +326,39 @@ public class AffichageFractale extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_fichierBtnActionPerformed
 
+    /**
+     * Method of AffichageFractale
+     * When the JFrame is perfomed, the new nbSequence is taken into account.
+     * If nbSequence is valid, the corresponding fractal and its dimension is generated and displayed
+     */
     private void nbSequenceTxtFldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nbSequenceTxtFldActionPerformed
         try {
             nbSequence = Integer.parseInt(nbSequenceTxtFld.getText());
-            if (nbSequence < pas)
-                pas = nbSequence;
-            if (!nomFichier.equals("")) {
-                if (ADNScrlBr.getValue() > (nbBases-nbSequence+1)){
-                    ADNScrlBr.setValue((nbBases-nbSequence+1));
+            // nbSequence doit être supérieur à 8 car l'analyse fractal se fait sur des mots de 8 bases ADN
+            if (nbSequence < 8){
+                javax.swing.JOptionPane.showMessageDialog(null,"Veuillez saisir un entier supérieur ou égal à 8.");
+                setVisible(true);
+                nbSequenceTxtFld.requestFocus();
+            }else{
+                // Si le pas est supérieur à nbSequence on positionne le pas au niveau de nbSequence
+                if (nbSequence < pas){
+                    pas = nbSequence;
+                    pasTxtFld.setText(""+pas);
                 }
-                ADNScrlBr.setMaximum((nbBases-nbSequence+1));
-                ((MyFractalPanel) fractalePnl).calculFractale(fractale, (startBase-1), (startBase+nbSequence-1), typeFractale);
-                dimensionFractaleTxtFld.setText(String.format("%.3f",fractale.getDimensionFractale()));
-                fractalePnl.repaint();
+                // Si un fichier est en cours de lecture on réactualise l'affichage de la fractale et de sa dimension
+                if (!nomFichier.equals("")) {
+                    if (ADNScrlBr.getValue() > (nbBases-nbSequence+1)){
+                        ADNScrlBr.setValue((nbBases-nbSequence+1));
+                    }
+                    ADNScrlBr.setMaximum((nbBases-nbSequence+1));
+                    ((MyFractalPanel) fractalePnl).calculFractale(fractale, (startBase-1), (startBase+nbSequence-1), typeFractale);
+                    dimensionFractaleTxtFld.setText(String.format("%.3f",fractale.getDimensionFractale()));
+                    fractalePnl.repaint();
+                }
             }
 
         } catch (NumberFormatException e){
-            javax.swing.JOptionPane.showMessageDialog(null,"Veuillez saisir un entier.");
+            javax.swing.JOptionPane.showMessageDialog(null,"Veuillez saisir un entier supérieur ou égal à 8.");
             setVisible(true);
             nbSequenceTxtFld.requestFocus();
         }
@@ -346,9 +367,15 @@ public class AffichageFractale extends javax.swing.JFrame {
     private void formFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_formFocusLost
     }//GEN-LAST:event_formFocusLost
 
+    /**
+     * Method of AffichageFractale
+     * When the JFrame is perfomed, the new debutSequence is taken into account.
+     * If debutSequence is valid, the corresponding fractal and its dimension is generated and displayed
+     */
     private void debutSequenceTxtFldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_debutSequenceTxtFldActionPerformed
         try {
             int test = Integer.parseInt(debutSequenceTxtFld.getText());
+            // Le début de la séquence doit être inférieur à la taille du fichier moins la longueur de la séquence analysée.
             if (test > (nbBases-nbSequence+1)){
                 javax.swing.JOptionPane.showMessageDialog(null,"Veuillez saisir un entier positif inférieur ou égal à "+(nbBases-nbSequence+1)+".");
                 setVisible(true);
@@ -370,6 +397,11 @@ public class AffichageFractale extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_debutSequenceTxtFldActionPerformed
 
+    /**
+     * Method of AffichageFractale
+     * When the Sroll Bar ADNScrlBr is moved, the new debutSequence is taken into account.
+     * The corresponding fractal and its dimension is generated and displayed
+     */
     private void ADNScrlBrAdjustmentValueChanged(java.awt.event.AdjustmentEvent evt) {//GEN-FIRST:event_ADNScrlBrAdjustmentValueChanged
         startBase = ADNScrlBr.getValue();
         debutSequenceTxtFld.setText(""+startBase);
@@ -380,31 +412,53 @@ public class AffichageFractale extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_ADNScrlBrAdjustmentValueChanged
 
+    /**
+     * Method of AffichageFractale
+     * When the Text Field nbSequence lost the focus, the new nbSequence is taken into account.
+     * If nbSequence is valid, the corresponding fractal and its dimension is generated and displayed
+     */
     private void nbSequenceTxtFldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nbSequenceTxtFldFocusLost
         try {
             nbSequence = Integer.parseInt(nbSequenceTxtFld.getText());
-            if (nbSequence < pas)
-                pas = nbSequence;
-            if (!nomFichier.equals("")) {
-                if (ADNScrlBr.getValue() > (nbBases-nbSequence+1)){
-                    ADNScrlBr.setValue((nbBases-nbSequence+1));
+            // nbSequence doit être supérieur à 8 car l'analyse fractal se fait sur des mots de 8 bases ADN
+            if (nbSequence < 8){
+                javax.swing.JOptionPane.showMessageDialog(null,"Veuillez saisir un entier supérieur ou égal à 8.");
+                setVisible(true);
+                nbSequenceTxtFld.requestFocus();
+            }else{
+                // Si le pas est supérieur à nbSequence on positionne le pas au niveau de nbSequence
+                if (nbSequence < pas){
+                    pas = nbSequence;
+                    pasTxtFld.setText(""+pas);
                 }
-                ADNScrlBr.setMaximum((nbBases-nbSequence+1));
-                ((MyFractalPanel) fractalePnl).calculFractale(fractale, (startBase-1), (startBase+nbSequence-1), typeFractale);
-                dimensionFractaleTxtFld.setText(String.format("%.3f",fractale.getDimensionFractale()));
-                fractalePnl.repaint();
+                // Si un fichier est en cours de lecture on réactualise l'affichage de la fractale et de sa dimension
+                if (!nomFichier.equals("")) {
+                    if (ADNScrlBr.getValue() > (nbBases-nbSequence+1)){
+                        ADNScrlBr.setValue((nbBases-nbSequence+1));
+                    }
+                    ADNScrlBr.setMaximum((nbBases-nbSequence+1));
+                    ((MyFractalPanel) fractalePnl).calculFractale(fractale, (startBase-1), (startBase+nbSequence-1), typeFractale);
+                    dimensionFractaleTxtFld.setText(String.format("%.3f",fractale.getDimensionFractale()));
+                    fractalePnl.repaint();
+                }
             }
 
         } catch (NumberFormatException e){
-            javax.swing.JOptionPane.showMessageDialog(null,"Veuillez saisir un entier.");
+            javax.swing.JOptionPane.showMessageDialog(null,"Veuillez saisir un entier supérieur ou égal à 8.");
             setVisible(true);
             nbSequenceTxtFld.requestFocus();
         }
     }//GEN-LAST:event_nbSequenceTxtFldFocusLost
 
+    /**
+     * Method of AffichageFractale
+     * When the Text Field debutSequence lost the focus, the new debutSequence is taken into account.
+     * If debutSequence is valid, the corresponding fractal and its dimension is generated and displayed
+     */
     private void debutSequenceTxtFldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_debutSequenceTxtFldFocusLost
         try {
             int test = Integer.parseInt(debutSequenceTxtFld.getText());
+            // Le début de la séquence doit être inférieur à la taille du fichier moins la longueur de la séquence analysée.
             if (test > (nbBases-nbSequence+1)){
                 javax.swing.JOptionPane.showMessageDialog(null,"Veuillez saisir un entier positif inférieur ou égal à "+(nbBases-nbSequence+1)+".");
                 setVisible(true);
@@ -426,6 +480,11 @@ public class AffichageFractale extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_debutSequenceTxtFldFocusLost
 
+    /**
+     * Method of AffichageFractale
+     * When the JFrame is perfomed, the new typeFractal is taken into account.
+     * The corresponding type of fractal and its dimension is generated and displayed
+     */
     private void typeFractalCmbBxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_typeFractalCmbBxActionPerformed
         
         typeFractale = typeFractalCmbBx.getSelectedIndex() + 1;
@@ -436,6 +495,11 @@ public class AffichageFractale extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_typeFractalCmbBxActionPerformed
 
+    /**
+     * Method of AffichageFractale
+     * When the state of the Combo Box typeFractal is changed, the new typeFractal is taken into account.
+     * The corresponding type of fractal and its dimension is generated and displayed
+     */
     private void typeFractalCmbBxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_typeFractalCmbBxItemStateChanged
         
         typeFractale = typeFractalCmbBx.getSelectedIndex() + 1;
@@ -446,11 +510,18 @@ public class AffichageFractale extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_typeFractalCmbBxItemStateChanged
 
+    /**
+     * Method of AffichageFractale
+     * When the JFrame is perfomed, the new pas is taken into account.
+     * If pas is valid, the corresponding fractal and its dimension is generated and displayed
+     */
     private void pasTxtFldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pasTxtFldActionPerformed
         try {
             pas = Integer.parseInt(pasTxtFld.getText());
-            if (pas <= 0){
-                javax.swing.JOptionPane.showMessageDialog(null,"Veuillez saisir un entier positif inférieur à "+nbSequence+".");
+            // Le pas doit être supérieur ou égal à 8 car l'analyse fractal se fait sur des mots de 8 bases ADN.
+            // Le pas doit également être inférieur à la taille de la séquence étudiée.
+            if ((pas < 8)||(pas > nbSequence)){
+                javax.swing.JOptionPane.showMessageDialog(null,"Veuillez saisir un entier positif supérieur à 7 et inférieur à "+nbSequence+".");
                 setVisible(true);
                 debutSequenceTxtFld.requestFocus();
             }else{
@@ -472,8 +543,10 @@ public class AffichageFractale extends javax.swing.JFrame {
     private void pasTxtFldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_pasTxtFldFocusLost
         try {
             pas = Integer.parseInt(pasTxtFld.getText());
-            if (pas <= 0){
-                javax.swing.JOptionPane.showMessageDialog(null,"Veuillez saisir un entier positif inférieur à "+nbSequence+".");
+            // Le pas doit être supérieur ou égal à 8 car l'analyse fractal se fait sur des mots de 8 bases ADN.
+            // Le pas doit également être inférieur à la taille de la séquence étudiée.
+            if ((pas < 8)||(pas > nbSequence)){
+                javax.swing.JOptionPane.showMessageDialog(null,"Veuillez saisir un entier positif supérieur à 7 et inférieur à "+nbSequence+".");
                 setVisible(true);
                 debutSequenceTxtFld.requestFocus();
             }else{

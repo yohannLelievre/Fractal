@@ -20,7 +20,6 @@ public class MyFractalPanel extends javax.swing.JPanel {
     public MyFractalPanel() {
         // initialisation de l'image
         imageFractale = new java.awt.image.BufferedImage(tailleFractale,tailleFractale,java.awt.image.BufferedImage.TYPE_INT_RGB);
-        //java.awt.Graphics2D g = imageFractale.createGraphics();
     }
 
 
@@ -33,10 +32,7 @@ public class MyFractalPanel extends javax.swing.JPanel {
      */
     @Override
     public void paintComponent(java.awt.Graphics g) {
-        //java.awt.Graphics scratchGraphics = (g == null) ? null : g.create();
-        //g.drawImage(imageFractale, this.getX(), this.getY(), this.getWidth(), this.getHeight(), this);
         g.drawImage(imageFractale, 0, 0, this.getWidth(), this.getHeight(), this);
-        //g.dispose();
         
     }
 
@@ -133,10 +129,6 @@ public class MyFractalPanel extends javax.swing.JPanel {
         
         dimensionF = java.lang.Math.log10( (double)Nepsi ) / java.lang.Math.log10( (double)tailleFractale );
         
-        //Debug
-        //System.out.println("Le N epsilon est : " + Nepsi);
-        //System.out.println("La dimension fractale est : " + dimensionF);
-    
         return dimensionF;
         
     }
@@ -145,8 +137,8 @@ public class MyFractalPanel extends javax.swing.JPanel {
      /**
      * methode of MyFractalPanel
      * constructs the fractal image with the DNA file.
-     * This construction is based on the number of time where a coordinate is targeted.
-     * Each time a counter is incremented and finally a corresponding shade of grey is drawn
+     * This construction is based on the number of time where a new coordinate is targeted.
+     * Each time a new coordinate is targeted a black point is drawn
      * 
      * @param fractale the fractal object which contains the DNA buffer as well as the size of the DNA file and the last calculated Minkowski–Bouligand dimension
      * @param startBase the start position in the DNA file
@@ -208,7 +200,7 @@ public class MyFractalPanel extends javax.swing.JPanel {
             // pour chaque nouveau point on incrémente Nepsilon de tel sorte que Nepsilon représente la surface du motif fractal
             if(matrice[x][y]==1) Nepsilon++;
             
-            // On ajoute un point blanc au niveau de la coordonnée sélectionnée
+            // On ajoute un point noir au niveau de la coordonnée sélectionnée
             imageFractale.setRGB(x, y, col);
 
             base = (char)fractale.getFastaBuff().get();
@@ -218,9 +210,6 @@ public class MyFractalPanel extends javax.swing.JPanel {
         // calcul de la dimension fractale
         fractale.setDimensionFractale( calculDimension(Nepsilon) );
 
-        //Debug
-        //System.out.println("Le nombre de base : " + (size-entete)+" et la taille de l'entete : "+entete);
-        
     }
     
     
@@ -299,7 +288,7 @@ public class MyFractalPanel extends javax.swing.JPanel {
         // On identifie la valeur max dans la matrice et on en calcule le logarithme néperien
         occurenceMax = Math.log( (double)maxMatrice(matrice) );
 
-        // Un point gris est ajouté à l'image fractale pour chaque élément de la matrice en fonction rapport au max
+        // Un point gris est ajouté à l'image fractale pour chaque élément de la matrice en fonction du rapport au max
         if(occurenceMax != 0)
             for(int i=0; i<tailleFractale; i++)
                 for(int j=0; j<tailleFractale; j++){
@@ -309,9 +298,6 @@ public class MyFractalPanel extends javax.swing.JPanel {
                     col = (r << 16) | (g << 8) | b;
                     imageFractale.setRGB(i, j, col);
                 }
-
-        //Debug
-        //System.out.println("Le nombre de base : " + (size-entete)+" et la taille de l'entete : "+entete);
         
     }
 
@@ -435,9 +421,6 @@ public class MyFractalPanel extends javax.swing.JPanel {
                     imageFractale.setRGB(i, j, col);
                 }
 
-        //Debug
-        System.out.println("Le max : " + differenceMax +" et le min : "+differenceMin);
-            
     }
 
     

@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 
-/**
+/** This Object is a data container about the read DNA file
  *
  * @author yohann.lelievre
  */
@@ -43,6 +43,7 @@ public class ObjetFractale {
             while(bBuff.get() != '\n'){
                 entete++;
             }
+            // Initialisation du buffer fastaBuff
             nombreBase = size-entete;
             fastaBuff = ByteBuffer.allocate(nombreBase);
             fastaBuff = bBuff.slice();
